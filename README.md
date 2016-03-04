@@ -19,7 +19,7 @@ Now when we display `S`, we see that it has been modified despite not being retu
 ### Object Creation
 You can create a `structobj` in a number of different ways
 
-**Standard Structure Inputs**
+#### Standard Structure Inputs ####
 
 The typical inputs can be passed to the `structobj` constructor
 
