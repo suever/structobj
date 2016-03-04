@@ -35,22 +35,30 @@ classdef structobj < handle
     end
 
     methods
-        function self = structobj(S)
+        function self = structobj(varargin)
             % structobj - Constructor for the structobj object
             %
             % USAGE:
             %   self = structobj(S)
+            %   self = structobj(varargin);
             %
             % INPUTS:
-            %   S:      struct, Structure containing all of the data to be
-            %           stored.
+            %   S:          struct, Structure containing all of the data to
+            %               be stored.
+            %
+            %   varargin:   Mixed, Inputs typically passed to the struct
+            %               constructor.
             %
             % OUTPUTS:
             %   self:   Handle, Handle to the structobj object which can
             %           be used just like a struct to modify the contents.
 
-            if ~exist('S', 'var')
+            if nargin == 0
                 S = struct();
+            elseif ~isstruct(varargin{1})
+                S = struct(varargin{:});
+            else
+                S = varargin{1};
             end
 
             % If a multi-dimensional struct is used, then create a
