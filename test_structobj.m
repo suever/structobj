@@ -6,12 +6,7 @@ classdef test_structobj < matlab.unittest.TestCase
     %   part of a larger suite.
     %
     % USAGE:
-    %   res = tests.start();    % Run the tests automatically
     %   alltests = tests();     % Get all tests within this file to be run
-    %
-    % OUTPUTS:
-    %   res:    TestResult, matlab.unittest.TestResult object that provides
-    %           detailed information about which tests passed or failed.
 
     % Copyright (c) <2016> Jonathan Suever (suever@gmail.com
     % All rights reserved
@@ -49,11 +44,16 @@ classdef test_structobj < matlab.unittest.TestCase
         end
 
         function testMultiStructConstructor(testCase)
-            % Test passing input arguments to create a multi-dim struct
+            % Test passing in multiple input arguments to struct
             I = structobj('Key1', {'a', 'b'}, 'Key2', {'c', 'd'});
 
-            testCase.assertSize(I, [1, 2], 'Should be 1x2');
+            testCase.assertSize(I, [1 2], 'Unexpected size')
             testCase.assertEqual(fieldnames(I), {'Key1'; 'Key2'});
+
+            testCase.assertEqual(I(1).Key1, 'a');
+            testCase.assertEqual(I(2).Key1, 'b');
+            testCase.assertEqual(I(1).Key2, 'c');
+            testCase.assertEqual(I(2).Key2, 'd');
         end
 
         function testSaveLoad(testCase)
@@ -485,24 +485,6 @@ classdef test_structobj < matlab.unittest.TestCase
                 'The copy operation yielded a different object');
             testCase.assertNotSameHandle(I, I2, ...
                 'Your object is a clone rather than a copy');
-        end
-    end
-
-    methods (Static)
-        function results = start(varargin)
-            % tests.start - Static method for running all tests
-            %
-            % USAGE:
-            %   results = tests.start();
-            %
-            % OUTPUTS:
-            %
-            %   results:    TestResult, matlab.unittest.TestResult object
-            %               that provides detailed information about which
-            %               tests passed or failed.
-
-            t = test_structobj();
-            results = t.run(varargin{:});
         end
     end
 end

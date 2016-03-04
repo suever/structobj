@@ -471,5 +471,23 @@ classdef structobj < handle
 
             res = structobj(S);
         end
+
+        function results = test(varargin)
+            % structobj.test - Runs all unittests
+            %
+            % USAGE:
+            %   results = structobj.test(name);
+            %
+            % INPUTS:
+            %   name:   String, Name of a specific test to run (optional)
+            %
+            % OUTPUTS:
+            %   results:    TestResult, matlab.unittest.TestResult object
+            %               that provides detailed information about which
+            %               tests passed or failed.
+
+            tests = test_structobj();
+            results = tests.run(varargin{:});
+        end
     end
 end
