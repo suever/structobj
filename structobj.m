@@ -330,7 +330,7 @@ classdef structobj < handle
             % OUTPUTS:
             %   val:        The value of the requested field
 
-            if ~isfield(self, field)
+            if ~isfield(self, field) && exist('default', 'var')
                 if numel(self) > 1
                     res = repmat({default}, size(self));
                 else
