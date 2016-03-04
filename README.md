@@ -135,62 +135,56 @@ If you need a copy of the `structobj` that is *also* a `structobj` but *isn't* l
 
 ### Other Supported Functionality
 
-* Dynamic field references
+* **Dynamic field references**
 
-      fieldname = 'a';
-      value = S.(fieldname);
+        fieldname = 'a';
+        value = S.(fieldname);
 
-* Concatenation
+* **Concatenation**
 
-      S = [structobj('a', 1), structobj('a', 2)];
-      S = [S; S]
-      S = horzcat(S, S);
-      S = vertcat(S, S);
+        S = [structobj('a', 1), structobj('a', 2)];
+        S = [S; S]
+        S = horzcat(S, S);
+        S = vertcat(S, S);
 
-* Tab completion
+* **Tab completion**
 
-      S = structobj('parameter', 'value');
+        S = structobj('parameter', 'value');
+        >> S.<tab>
 
-      >> S.<tab>
+* **Field ordering**
 
-* Field ordering
+        S = structobj('b', 1, 'a', 2);
 
-      S = structobj('b', 1, 'a', 2);
+        S = 
 
-      S = 
+          b: 1
+          a: 2
 
-        b: 1
-        a: 2
+        orderfields(S)
 
-      orderfields(S)
+        S = 
 
-      S = 
+          a: 2
+          b: 1
 
-        a: 2
-        b: 1
+* **Field alteration methods**
 
-* Field alteration methods
+        S = structobj();
+        setfield(S, 'fieldname', 'value');
+        tf = isfield(S, 'fieldname')
+        value = getfield(S, 'fieldname');
+        rmfield(S, 'fieldname');
 
-      S = structobj();
+* **Saving/Loading from file**
 
-      setfield(S, 'fieldname', 'value');
+        S = structobj('field1', 'value1');
+        save('data.mat', 'S');
+        values = load('data.mat');
 
-      tf = isfield(S, 'fieldname')
+        values.S = 
 
-      value = getfield(S, 'fieldname');
-
-      rmfield(S, 'fieldname');
-
-
-* Saving/Loading from file
-
-      S = structobj('field1', 'value1');
-      save('data.mat', 'S');
-      values = load('data.mat');
-
-      values.S = 
-
-          field1: 'value1'
+            field1: 'value1'
 
 ### Testing
 
