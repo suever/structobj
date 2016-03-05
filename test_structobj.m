@@ -486,5 +486,26 @@ classdef test_structobj < matlab.unittest.TestCase
             testCase.assertNotSameHandle(I, I2, ...
                 'Your object is a clone rather than a copy');
         end
+
+        function testGetFieldDefault(testCase)
+            % Specify default value to be returned from getfield
+            S = structobj('a', 2);
+
+            % Existing field and no default
+            values = getfield(S, 'a');  %#ok
+            testCase.assertEqual(values, S.a);
+
+            % Non-existent field with default
+            values = getfield(S, 'b', 'value');
+            testCase.assertEqual(values, 'value');
+
+            % Get the ID of the error we expect
+            str = struct(S);
+            try str.c; catch ME; end
+
+            % Non-existent field no default
+            errorFunc = @()getfield(S, 'c');  %#ok
+            testCase.assertError(errorFunc, ME.identifier)
+        end
     end
 end
