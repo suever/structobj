@@ -196,14 +196,14 @@ classdef structobj < handle
                 varargout = {obj};
                 return
             end
-
-            try
-                [varargout{1:nargout}] = builtin('subsref', struct(self), s);
-            catch ME
-                if numel(s) == 2
-                    [varargout{1:nargout}] = feval(s(1).subs, self, s(2).subs{:});
+            
+            [varargout{1:nargout}] = builtin('subsref', struct(self), s(1));
+            
+            if numel(s) > 1
+                if isa(varargout, class(self))
+                    [varargout{:}] = varargout{1}.subsref(s(2:end));
                 else
-                    rethrow(ME);
+                    [varargout{:}] = subsref(varargout{:}, s(2:end));
                 end
             end
         end
