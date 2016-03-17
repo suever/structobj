@@ -213,7 +213,7 @@ classdef test_structobj < matlab.unittest.TestCase
 
             info1 = structobj(inputs1);
 
-            info1.update(inputs2);
+            update(info1, inputs2);
 
             for field = fieldnames(info1)'
                 for k = 1:numel(info1)
@@ -232,7 +232,7 @@ classdef test_structobj < matlab.unittest.TestCase
             info1 = structobj(inputs1);
             info2 = structobj(inputs2);
 
-            info1.update(info2);
+            update(info1, info2);
 
             for field = fieldnames(info1)'
                 for k = 1:numel(info1)
@@ -250,7 +250,7 @@ classdef test_structobj < matlab.unittest.TestCase
 
             info1 = structobj(inputs1);
 
-            info1.update(inputs2);
+            update(info1, inputs2);
 
             for field = fieldnames(info1)'
                 testCase.assertEqual(inputs2.(field{1}), info1.(field{1}));
@@ -267,7 +267,7 @@ classdef test_structobj < matlab.unittest.TestCase
 
             fields = cat(1, fieldnames(info1), fieldnames(inputs2));
 
-            info1.update(inputs2);
+            update(info1, inputs2);
 
             testCase.assertEqual(sort(fieldnames(info1)), sort(fields));
 
@@ -289,7 +289,7 @@ classdef test_structobj < matlab.unittest.TestCase
             info1 = structobj(inputs1);
             info2 = structobj(inputs2);
 
-            info1.update(info2);
+            update(info1, info2);
 
             for field = fieldnames(info1)'
                 testCase.assertEqual(info2.(field{1}), info1.(field{1}));
@@ -307,7 +307,7 @@ classdef test_structobj < matlab.unittest.TestCase
 
             fields = cat(1, fieldnames(info1), fieldnames(info2));
 
-            info1.update(info2);
+            update(info1, info2);
 
             testCase.assertEqual(sort(fieldnames(info1)), sort(fields));
 
