@@ -180,7 +180,7 @@ classdef structobj < handle
             dat = reshape(dat, size(obj));
 
             if isempty(s)
-                out = obj;
+                self = obj;
                 return
             end
 
@@ -214,9 +214,9 @@ classdef structobj < handle
                 varargout = {obj};
                 return
             end
-            
+
             [varargout{1:nargout}] = builtin('subsref', struct(self), s(1));
-            
+
             if numel(s) > 1
                 if isa(varargout, class(self))
                     [varargout{:}] = varargout{1}.subsref(s(2:end));

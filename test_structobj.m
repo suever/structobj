@@ -409,11 +409,11 @@ classdef test_structobj < matlab.unittest.TestCase
             inputs = struct('Odd', {1, 3, 5}, 'Even', {2, 4, 6});
 
             I = structobj(inputs);
-                        
+
             % Now assign a single value
             I(1).Odd = 7;
             testCase.assertEqual([I.Odd], [7 3 5]);
-            
+
             % Assign all values
             [I.Odd] = deal(11,13,15);
             testCase.assertEqual([I.Odd], [11 13 15]);
@@ -567,16 +567,14 @@ classdef test_structobj < matlab.unittest.TestCase
 
             testCase.assertSize(s, [1 2]);
 
-            testCase.assertEqual(s(1).a, 2)
-            testCase.assertEqual(s(2).a, 2)
+            testCase.assertEqual(s(1).a, 1)
+            testCase.assertEqual(s(2).a, 1)
 
             origs = s;
 
             s(1).a = 2;
 
             testCase.assertSameHandle(origs, s);
-
-            keyboard
 
             testCase.assertEqual(s(1).a, 2)
             testCase.assertEqual(s(2).a, 2)
