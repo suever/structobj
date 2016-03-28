@@ -175,9 +175,27 @@ classdef structobj < handle
             else
                 obj = self;
             end
+
             dat = [obj.Data];
             dat = reshape(dat, size(obj));
-            out = builtin('subsasgn', dat, s, varargin{:});
+
+            if isempty(s)
+                out = obj;
+                return
+            end
+
+            try
+                out = builtin('subsasgn', dat, s, varargin{:});
+            catch ME
+                if strcmpi(ME.identifier, 'MATLAB:noPublicFieldForClass')
+                    item = subsref(dat, s(1));
+                    ignore = subsasgn(item, s(2:end), varargin{:}); %#ok
+                    out = dat;
+                else
+                    rethrow(ME);
+                end
+            end
+
             out = num2cell(out);
             [obj.Data] = deal(out{:});
         end
