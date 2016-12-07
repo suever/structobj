@@ -1,4 +1,7 @@
 # structobj
+[![MATLAB FEX](https://img.shields.io/badge/MATLAB%20FEX-55773-green.svg)][4]
+[![Minimum Version](https://img.shields.io/badge/Requires-R2008a-blue.svg)][5]
+
 This is a class that simply wraps the functionality of the builtin `struct` datatype, but adds a number of useful features. The most notable feature, is that a `structobj` is a handle class and is therefore passed *by reference* to other functions. This allows you to essentially modify the structure *in-place*.
 
     S = structobj('Parameter1', 'value');
@@ -206,3 +209,5 @@ This software is licensed under the [three-clause BSD license][2].
 [1]: https://github.com/suever
 [2]: https://github.com/suever/structobj/blob/master/LICENSE
 [3]: https://github.com/suever/structobj/issue
+[4]: http://www.mathworks.com/matlabcentral/fileexchange/55773-structobj
+[5]: http://www.mathworks.com/products/matlab/
